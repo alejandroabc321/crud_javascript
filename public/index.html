@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>CRUD Usuarios</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Gestión de Usuarios</h1>
+    <form id="userForm">
+      <input type="number" id="id_rol" placeholder="ID Rol" required />
+      <input type="text" id="nombre" placeholder="Nombre" required />
+      <input type="text" id="apellido" placeholder="Apellido" required />
+      <input type="email" id="correo_electronico" placeholder="Correo Electrónico" required />
+      <input type="password" id="contraseña" placeholder="Contraseña" required />
+      <input type="date" id="fecha_nacimiento" placeholder="Fecha de nacimiento" required />
+      <button type="submit">Guardar</button>
+    </form>
+
+    <h2>Lista de Usuarios</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Apellido</th>
+          <th>Correo</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody id="userTable"></tbody>
+    </table>
+  </div>
+  <script src="index.js"></script>
+</body>
+</html>
