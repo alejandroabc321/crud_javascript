@@ -35,7 +35,7 @@ router.put('/:id', async (req, res) => {
   const { id } = req.params;
 
   try {
-    const [result] = await pool.query(
+    await pool.query(
       `UPDATE Usuarios
        SET id_rol = ?, nombre = ?, apellido = ?, correo_electronico = ?, contraseña = ?, fecha_nacimiento = ?
        WHERE id_usuario = ?`,
@@ -52,7 +52,7 @@ router.delete('/:id', async (req, res) => {
   const { id } = req.params;
 
   try {
-    const [result] = await pool.query('DELETE FROM Usuarios WHERE id_usuario = ?', [id]);
+    await pool.query('DELETE FROM Usuarios WHERE id_usuario = ?', [id]);
     res.json({ mensaje: 'Usuario eliminado' });
   } catch (err) {
     res.status(500).json({ error: 'Error al eliminar usuario' });

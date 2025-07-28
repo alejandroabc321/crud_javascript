@@ -1,24 +1,22 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>CRUD Usuarios</title>
-  <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Gestión de Usuarios</title>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <div class="container">
-    <h1>Gestión de Usuarios</h1>
-    <form id="userForm">
-      <input type="number" id="id_rol" placeholder="ID Rol" required />
+    <h1>Usuarios</h1>
+    <form id="formulario">
       <input type="text" id="nombre" placeholder="Nombre" required />
       <input type="text" id="apellido" placeholder="Apellido" required />
-      <input type="email" id="correo_electronico" placeholder="Correo Electrónico" required />
+      <input type="email" id="correo" placeholder="Correo electrónico" required />
       <input type="password" id="contraseña" placeholder="Contraseña" required />
-      <input type="date" id="fecha_nacimiento" placeholder="Fecha de nacimiento" required />
-      <button type="submit">Guardar</button>
+      <input type="date" id="fecha_nacimiento" required />
+      <button type="submit">Agregar</button>
     </form>
-
-    <h2>Lista de Usuarios</h2>
     <table>
       <thead>
         <tr>
@@ -28,9 +26,9 @@
           <th>Acciones</th>
         </tr>
       </thead>
-      <tbody id="userTable"></tbody>
+      <tbody id="tabla-usuarios"></tbody>
     </table>
   </div>
-  <script src="index.js"></script>
+  <script src="app.js"></script>
 </body>
 </html>

@@ -4,10 +4,7 @@ const usuariosRoutes = require('./routes/usuarios');
 const pool = require('./db');
 require('dotenv').config();
 
-// Middleware para JSON
 app.use(express.json());
-
-// ✅ Servir archivos estáticos (HTML, CSS, JS)
 app.use(express.static('public'));
 
 // Verificar conexión a la base de datos
@@ -15,7 +12,7 @@ pool.query('SELECT 1')
   .then(() => console.log('✅ Conectado a la base de datos'))
   .catch(err => console.error('❌ Error de conexión:', err));
 
-// Usar las rutas
+// Rutas
 app.use('/usuarios', usuariosRoutes);
 
 // Iniciar servidor
