@@ -16,19 +16,16 @@ router.get('/', async (req, res) => {
 router.post('/', async (req, res) => {
   const { id_rol, nombre, apellido, correo_electronico, contraseña, fecha_nacimiento } = req.body;
 
-  if (!id_rol || !nombre || !apellido || !correo_electronico || !contraseña || !fecha_nacimiento) {
-    return res.status(400).json({ error: 'Faltan datos obligatorios' });
-  }
-
   try {
     const [result] = await pool.query(
       `INSERT INTO Usuarios (id_rol, nombre, apellido, correo_electronico, contraseña, fecha_nacimiento)
        VALUES (?, ?, ?, ?, ?, ?)`,
       [id_rol, nombre, apellido, correo_electronico, contraseña, fecha_nacimiento]
     );
-    res.json({ id_usuario: result.insertId });
-  } catch (err) {
-    res.status(500).json({ error: 'Error al crear usuario', detalle: err.message });
+    res.status(201).json({ mensaje: "Usuario creado", id: result.insertId });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Error al crear usuario" });
   }
 });
 

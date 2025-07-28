@@ -1,35 +1,41 @@
 let editingId = null;
 
-document.getElementById("userForm").addEventListener("submit", async (e) => {
+function saveUser(e) {
   e.preventDefault();
+  const id_rol = document.getElementById("id_rol").value;
+  const nombre = document.getElementById("nombre").value.trim();
+  const apellido = document.getElementById("apellido").value.trim();
+  const correo_electronico = document.getElementById("correo_electronico").value.trim();
+  const contraseña = document.getElementById("contraseña").value;
+  const fecha_nacimiento = document.getElementById("fecha_nacimiento").value;
 
-  const data = {
-    id_rol: document.getElementById("id_rol").value,
-    nombre: document.getElementById("nombre").value,
-    apellido: document.getElementById("apellido").value,
-    correo_electronico: document.getElementById("correo_electronico").value,
-    contraseña: document.getElementById("contraseña").value,
-    fecha_nacimiento: document.getElementById("fecha_nacimiento").value
-  };
+  if (!id_rol || !nombre || !apellido || !correo_electronico || !contraseña || !fecha_nacimiento) return;
 
-  if (editingId) {
-    await fetch(`/usuarios/${editingId}`, {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data),
+  fetch("http://localhost:3000/usuarios", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      id_rol,
+      nombre,
+      apellido,
+      correo_electronico,
+      contraseña,
+      fecha_nacimiento
+    }),
+  })
+    .then((res) => res.json())
+    .then((data) => {
+      alert("✅ Usuario guardado en la base de datos");
+      document.getElementById("userForm").reset();
+      loadUsers();
+    })
+    .catch((err) => {
+      console.error("❌ Error al guardar usuario:", err);
+      alert("Error al guardar usuario.");
     });
-    editingId = null;
-  } else {
-    await fetch("/usuarios", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data),
-    });
-  }
-
-  e.target.reset();
-  loadUsers();
-});
+}
 
 async function loadUsers() {
   const res = await fetch("/usuarios");
